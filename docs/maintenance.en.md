@@ -56,6 +56,7 @@ GitHub Secrets:
 GitHub Variables:
 
 - `SITE_URL`
+- `CLOUDFLARE_DEPLOY_ENABLED=true` in the real deploying repository
 - Optional `PUBLIC_GISCUS_*`
 
 When the domain changes, update `SITE_URL` and redeploy so canonical URLs, RSS, and sitemap output stay correct.

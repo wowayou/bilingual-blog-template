@@ -55,7 +55,13 @@ The script creates a `draft: true` Markdown file with `translationStatus: machin
 
 ## Deployment
 
-Production deploys should go through GitHub Actions. The workflow builds the site and deploys it with Wrangler to Cloudflare Workers Static Assets. Add these repository secrets:
+CI runs on pushes and pull requests. Production deploys should go through GitHub Actions. The deploy workflow builds the site and deploys it with Wrangler to Cloudflare Workers Static Assets.
+
+Deploy is disabled by default for template repositories. Enable it only in the real site repository by adding this repository variable:
+
+- `CLOUDFLARE_DEPLOY_ENABLED=true`
+
+Add these repository secrets:
 
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`

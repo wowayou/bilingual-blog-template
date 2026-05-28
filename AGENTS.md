@@ -49,7 +49,7 @@ Do not run deployment commands unless explicitly asked.
 
 ## Deployment Rules
 
-Production deploys use GitHub Actions and Cloudflare Workers Static Assets. Required GitHub Secrets are `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. Required GitHub Variable is `SITE_URL`.
+Production deploys use GitHub Actions and Cloudflare Workers Static Assets. Required GitHub Secrets are `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. Required GitHub Variables are `SITE_URL` and `CLOUDFLARE_DEPLOY_ENABLED=true` in the real deploying repository.
 
 Routine releases should not use local `wrangler deploy`. Local deploys are emergency-only and must be followed by a normal GitHub Actions deployment.
 

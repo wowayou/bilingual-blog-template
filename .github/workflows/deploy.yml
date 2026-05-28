@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.CLOUDFLARE_DEPLOY_ENABLED == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,6 +28,25 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Check deployment configuration
+        run: |
+          set -euo pipefail
+          missing=0
+          for name in SITE_URL CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is required for deployment"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "Configure the required GitHub Variables and Secrets before running Deploy."
+            exit 1
+          fi
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Build
         run: npm run build
@@ -46,7 +66,6 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Verify production routes
-        if: ${{ vars.SITE_URL != '' }}
         run: |
           set -euo pipefail
           BASE="${SITE_URL%/}"

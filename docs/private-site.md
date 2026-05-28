@@ -124,6 +124,7 @@ GitHub Secrets:
 GitHub Variables:
 
 - `SITE_URL`
+- `CLOUDFLARE_DEPLOY_ENABLED=true`
 - Optional `PUBLIC_GISCUS_*`
 
 Update `wrangler.toml`:

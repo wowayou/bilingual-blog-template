@@ -56,6 +56,7 @@ GitHub Secrets：
 GitHub Variables：
 
 - `SITE_URL`
+- `CLOUDFLARE_DEPLOY_ENABLED=true`，只在真实部署仓库中开启
 - 可选 `PUBLIC_GISCUS_*`
 
 域名变化后必须更新 `SITE_URL` 并重新部署，确保 canonical、RSS 和 sitemap 正确。

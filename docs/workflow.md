@@ -48,11 +48,21 @@ Keep changes focused. For visual updates, include desktop and mobile screenshots
 
 Merge to `main` only after local checks pass.
 
-## 4. Production Deployment
+## 4. CI and Production Deployment
 
-Production deploys are handled by `.github/workflows/deploy.yml`.
+Pushes and pull requests are checked by `.github/workflows/ci.yml`. CI runs:
 
-The workflow runs:
+1. `npm ci`
+2. `npm run build`
+
+Production deploys are handled by `.github/workflows/deploy.yml`. The public template repository keeps deployment disabled by default so it does not fail when Cloudflare credentials are not configured.
+
+Deploy runs when either:
+
+- You manually start the **Deploy** workflow from GitHub Actions.
+- The repository variable `CLOUDFLARE_DEPLOY_ENABLED` is set to `true`, then pushes to `main` deploy automatically.
+
+The deployment workflow runs:
 
 1. `npm ci`
 2. `npm run build`
@@ -70,6 +80,7 @@ Secrets:
 Variables:
 
 - `SITE_URL`
+- `CLOUDFLARE_DEPLOY_ENABLED`, set to `true` only in the real deploy target repository
 
 Optional variables:
 
@@ -81,6 +92,8 @@ Optional variables:
 - `PUBLIC_GISCUS_THEME`
 
 If the final domain is not ready, use the Cloudflare-provided URL as `SITE_URL` temporarily. Update `SITE_URL` and rerun the workflow when the domain changes.
+
+Historical failed Deploy runs in the template repository usually mean Cloudflare credentials were not configured yet. That is expected during initial setup. Future template pushes should rely on CI; enable Deploy only in the repository that should publish a real site.
 
 ## 6. Post-Deploy Verification
 
