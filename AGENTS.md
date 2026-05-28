@@ -31,6 +31,7 @@ Do not run deployment commands unless explicitly asked.
 - `src/content/site/*.json`: localized site profile data.
 - `src/content/taxonomy/*.json`: localized tag metadata.
 - `src/i18n/messages/*.ts`: localized UI strings.
+- `public/images/posts/<contentId>/`: post media using stable public paths.
 - `src/layouts/BaseLayout.astro`: base document shell.
 - `src/layouts/ContentLayout.astro`: article/project shell and content enhancements.
 - `src/styles/global.css`: global tokens, layout, prose, and component styles.
@@ -43,6 +44,7 @@ Do not run deployment commands unless explicitly asked.
 - Keep content schema changes backward compatible when possible.
 - When adding a UI label, add it to both `src/i18n/messages/zh.ts` and `src/i18n/messages/en.ts`.
 - When adding a tag, add it to every taxonomy file before using it in content.
+- When adding post images, keep them under `public/images/posts/<contentId>/` and prefer explicit `cover` frontmatter over implicit first-image behavior.
 - Keep all routes trailing-slash compatible.
 - Respect `prefers-reduced-motion` for visual transitions.
 - Do not commit generated directories such as `dist/`, `.astro/`, `.wrangler/`, or `node_modules/`.

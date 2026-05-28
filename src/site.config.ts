@@ -17,6 +17,7 @@ export type SiteProfile = {
   socialLinks: {
     label: string;
     url: string;
+    icon?: string;
   }[];
 };
 

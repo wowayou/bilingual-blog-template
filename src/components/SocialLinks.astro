@@ -1,0 +1,25 @@
+---
+import { getSiteProfile } from "../site.config";
+import type { SiteProfile } from "../site.config";
+import type { Locale } from "../lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const links = getSiteProfile(locale).socialLinks as SiteProfile["socialLinks"];
+---
+
+{
+  links.length > 0 && (
+    <nav class="social-links" aria-label="Social links">
+      {links.map((link) => (
+        <a href={link.url} rel="me noopener noreferrer" target="_blank">
+          {link.icon && <span aria-hidden="true">{link.icon}</span>}
+          <span>{link.label}</span>
+        </a>
+      ))}
+    </nav>
+  )
+}

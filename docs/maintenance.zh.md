@@ -9,6 +9,7 @@
 - `src/content/site/*.json`：站点标题、简介、作者、About 文案、默认许可、时区。
 - `src/content/taxonomy/*.json`：标签的多语言名称和说明。
 - `src/i18n/messages/*.ts`：导航、按钮、状态等固定 UI 文案。
+- `public/images/posts/<contentId>/`：文章和项目图片。
 - `src/layouts/BaseLayout.astro`：页面 head、导航、主题切换、页脚。
 - `src/layouts/ContentLayout.astro`：文章/项目详情、目录、图片放大、代码复制、评论和文末信息。
 - `src/styles/global.css`：全局视觉 token、布局、Markdown 正文和组件样式。
@@ -31,6 +32,8 @@ npm run preview
 新增文章时，中文和英文可以分开发布，但同一组翻译必须使用相同 `contentId`。`slug` 应保持 ASCII、短、稳定。新增标签前，先在所有 taxonomy 文件里补齐该标签。
 
 如果文章或项目需要文末参考链接，在 frontmatter 中添加 `references`。只有需要覆盖默认许可时才添加单篇 `license`。
+
+只有文章确实需要卡片图、归档图或首图时才添加 `cover`。图片保持简单：静态文件放在 `public/images/posts/<contentId>/`，frontmatter 显式声明，人工压缩。具体规则见 `docs/media-workflow.md`。
 
 ## 样式维护
 

@@ -1,6 +1,10 @@
 ---
 title: "Markdown Style Guide"
 description: "A template article for checking prose typography, links, lists, tables, code, quotes, and image zoom behavior."
+cover:
+  src: "/images/posts/markdown-style-guide/cover.svg"
+  alt: "Markdown style guide cover illustration"
+  caption: "Template cover sample for validating article, card, and archive image layouts."
 pubDate: 2026-05-28
 contentId: "markdown-style-guide"
 slug: "markdown-style-guide"

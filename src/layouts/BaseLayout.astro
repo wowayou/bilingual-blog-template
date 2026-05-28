@@ -2,6 +2,7 @@
 import LanguageSwitch from "../components/LanguageSwitch.astro";
 import BackToTop from "../components/BackToTop.astro";
 import CurrentDateTime from "../components/CurrentDateTime.astro";
+import SocialLinks from "../components/SocialLinks.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 import { defaultLocale, localeNames, localizedPath, locales, t, type Locale } from "../lib/i18n";
 import "../styles/global.css";
@@ -106,6 +107,7 @@ const switchAlternates =
     </main>
     <footer class="site-footer">
       <span>{siteTitle}</span>
+      <SocialLinks locale={locale} />
       <CurrentDateTime locale={locale} />
       <a href={localizedPath(locale, "rss.xml")}>{t(locale, "rss")}</a>
     </footer>

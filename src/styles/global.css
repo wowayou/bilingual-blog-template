@@ -306,16 +306,52 @@ main {
 }
 
 .entry-card {
+  overflow: hidden;
   min-height: 240px;
-  padding: 22px;
   background: color-mix(in srgb, var(--panel), transparent 4%);
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: var(--shadow);
 }
 
+.entry-card-body {
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+}
+
+.entry-card-cover {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel-soft);
+}
+
+.entry-card-cover img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.archive-card {
+  min-height: auto;
+}
+
+.archive-card.has-cover {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.36fr) minmax(0, 1fr);
+}
+
+.archive-card .entry-card-cover {
+  height: 100%;
+  border-right: 1px solid var(--line);
+  border-bottom: 0;
+}
+
 .entry-card h2 {
-  margin: 12px 0 8px;
+  margin: 2px 0 0;
   line-height: 1.18;
   font-size: 1.35rem;
 }
@@ -384,6 +420,27 @@ main {
   background: color-mix(in srgb, var(--panel), transparent 30%);
   text-decoration: none;
   font-size: 0.92rem;
+}
+
+.article-cover {
+  margin: 0 0 34px;
+}
+
+.article-cover img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
+}
+
+.article-cover figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .prose {
@@ -872,6 +929,27 @@ main {
   font-size: 0.9rem;
 }
 
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  font-size: 0.9rem;
+}
+
+.social-links a:hover {
+  color: var(--text);
+}
+
 @media (max-width: 880px) {
   .content-with-toc.has-toc {
     display: block;
@@ -922,6 +1000,15 @@ main {
   .back-to-top {
     right: 18px;
     bottom: 18px;
+  }
+
+  .archive-card.has-cover {
+    display: block;
+  }
+
+  .archive-card .entry-card-cover {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
 
   .site-footer {

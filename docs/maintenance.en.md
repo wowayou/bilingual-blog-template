@@ -9,6 +9,7 @@ This guide is for humans maintaining the Astro bilingual blog template. The goal
 - `src/content/site/*.json`: site title, description, author, About copy, default license, and timezone.
 - `src/content/taxonomy/*.json`: localized tag labels and descriptions.
 - `src/i18n/messages/*.ts`: fixed UI labels for navigation, buttons, and states.
+- `public/images/posts/<contentId>/`: post and project media.
 - `src/layouts/BaseLayout.astro`: document head, navigation, theme switcher, and footer.
 - `src/layouts/ContentLayout.astro`: article/project detail pages, table of contents, image zoom, code copy, comments, and content footer.
 - `src/styles/global.css`: visual tokens, layout rules, Markdown prose, and component styling.
@@ -31,6 +32,8 @@ Run at least `npm run check` and `npm run build` before committing.
 Chinese and English posts may be published independently, but translated entries must share the same `contentId`. Keep `slug` values ASCII, short, and stable. Add new tags to every taxonomy file before using them in content.
 
 Use `references` in frontmatter when a post or project should show source links at the end. Use per-entry `license` only when it needs to override the site default.
+
+Use `cover` only when a post needs a card/archive/article image. Keep media simple: static files in `public/images/posts/<contentId>/`, explicit frontmatter, and manual compression. See `docs/media-workflow.md`.
 
 ## Styling Maintenance
 

@@ -34,6 +34,7 @@ Update these files first:
 - `src/content/taxonomy/*.json` if tags change
 - `public/favicon.svg`
 - `public/site.webmanifest`
+- `public/images/posts/<contentId>/`
 - `wrangler.toml`
 - GitHub repository variables and secrets
 
@@ -109,6 +110,7 @@ For visual changes, check:
 - Blog list
 - One article with table of contents
 - Code block copy button
+- Cover image and no-cover article states
 - Light, Dark, and System themes
 - Mobile viewport around 390px wide
 

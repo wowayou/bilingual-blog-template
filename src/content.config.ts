@@ -5,6 +5,14 @@ import { z } from "astro/zod";
 const sharedSchema = z.object({
   title: z.string(),
   description: z.string(),
+  cover: z
+    .object({
+      src: z.string(),
+      alt: z.string(),
+      caption: z.string().optional(),
+      objectPosition: z.string().optional()
+    })
+    .optional(),
   pubDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
   draft: z.boolean().default(false),
@@ -40,7 +48,7 @@ const blog = defineCollection({
     generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/, "")
   }),
   schema: sharedSchema.extend({
-    author: z.string().default("XCG")
+    author: z.string().default("Your Name")
   })
 });
 

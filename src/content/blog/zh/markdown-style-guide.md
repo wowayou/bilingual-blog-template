@@ -1,6 +1,10 @@
 ---
 title: "Markdown 样式指南"
 description: "用于验收正文排版、链接、列表、表格、代码、引用和图片放大效果的模板文章。"
+cover:
+  src: "/images/posts/markdown-style-guide/cover.svg"
+  alt: "Markdown 样式指南封面示意图"
+  caption: "模板封面示例：用于验证文章首图、卡片图和归档图。"
 pubDate: 2026-05-28
 contentId: "markdown-style-guide"
 slug: "markdown-style-guide"

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Markdown style guide cover</title>
+  <desc id="desc">A clean editorial cover for checking post cover image layout.</desc>
+  <rect width="1200" height="675" fill="#f8f7f3"/>
+  <path d="M0 540h1200v135H0z" fill="#dfe8e1"/>
+  <path d="M0 0h1200v675H0z" fill="url(#grid)"/>
+  <rect x="160" y="118" width="880" height="410" rx="28" fill="#ffffff" stroke="#d9ded5" stroke-width="4"/>
+  <path d="M236 210h410M236 286h600M236 362h520M236 438h350" stroke="#174ea6" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="900" cy="215" r="58" fill="#0d766e"/>
+  <path d="M805 444c58-112 170-112 228 0" fill="none" stroke="#b85c38" stroke-width="24" stroke-linecap="round"/>
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0v64" fill="none" stroke="#0d766e" stroke-opacity=".08" stroke-width="2"/>
+    </pattern>
+  </defs>
+</svg>

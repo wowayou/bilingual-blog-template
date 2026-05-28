@@ -12,5 +12,6 @@ yarn-debug.log*
 
 # Local planning/reference scratch files
 /PLAN.md
+/PLAN-*.md
 /next-step.md
 /博客站.jpg

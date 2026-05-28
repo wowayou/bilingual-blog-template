@@ -79,6 +79,8 @@ Routine releases should not use local `wrangler deploy`. Use local deploys only 
 - `docs/workflow.md`: publish from zero to first post
 - `docs/private-site.md`: create a private personal site from the public template
 - `docs/design-workflow.md`: optional Stitch / MCP design workflow
+- `docs/media-workflow.md`: cover images, inline images, sizing, and naming rules
+- `docs/roadmap.md`: template and private-site roadmap
 - `docs/maintenance.md`: maintenance guide index
 - `docs/maintenance.zh.md`: Chinese human maintenance guide
 - `docs/maintenance.en.md`: English human maintenance guide
