@@ -1,0 +1,27 @@
+---
+import { isLocale, locales, t } from "../../lib/i18n";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const lang = isLocale(Astro.params.lang) ? Astro.params.lang : "zh";
+---
+
+<BaseLayout title={t(lang, "search")} locale={lang}>
+  <header class="page-header">
+    <h1>{t(lang, "search")}</h1>
+    <p>{t(lang, "searchHint")}</p>
+  </header>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <div id="search" class="content-section"></div>
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (window.PagefindUI) {
+        new window.PagefindUI({ element: "#search", showSubResults: true });
+      }
+    });
+  </script>
+</BaseLayout>

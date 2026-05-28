@@ -1,0 +1,50 @@
+---
+import { getSiteProfile } from "../site.config";
+import type { ContentEntry } from "../lib/content";
+import { formatMessage, t, type Locale } from "../lib/i18n";
+
+interface Props {
+  entry: ContentEntry;
+  locale: Locale;
+}
+
+const { entry, locale } = Astro.props;
+const profile = getSiteProfile(locale);
+const license = entry.data.license ?? profile.license;
+const references = entry.data.references;
+const licenseText = formatMessage(t(locale, "licenseNotice"), { license: license.label });
+const [licenseBefore, licenseAfter = ""] = licenseText.split(license.label);
+---
+
+<footer class="content-footer">
+  <section class="content-license" aria-label={t(locale, "license")}>
+    <p>
+      {
+        license.url ? (
+          <>
+            {licenseBefore}
+            <a href={license.url} rel="license noopener noreferrer" target="_blank">{license.label}</a>
+            {licenseAfter}
+          </>
+        ) : (
+          licenseText
+        )
+      }
+    </p>
+  </section>
+  {
+    references.length > 0 && (
+      <section class="content-references" aria-labelledby="content-references-title">
+        <h2 id="content-references-title">{t(locale, "references")}</h2>
+        <ul>
+          {references.map((reference) => (
+            <li>
+              <a href={reference.url} rel="noopener noreferrer" target="_blank">{reference.title}</a>
+              {reference.note && <span>{reference.note}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</footer>

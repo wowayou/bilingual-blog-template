@@ -1,0 +1,14 @@
+{
+  "name": "Your Blog",
+  "short_name": "Your Blog",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#f8f7f3",
+  "background_color": "#f8f7f3",
+  "display": "standalone"
+}

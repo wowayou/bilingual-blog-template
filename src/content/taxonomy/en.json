@@ -1,0 +1,26 @@
+{
+  "architecture": {
+    "label": "Architecture",
+    "description": "System structure, technical choices, and long-term maintenance."
+  },
+  "blogging": {
+    "label": "Blogging",
+    "description": "Writing, publishing workflows, and personal site building."
+  },
+  "cloudflare": {
+    "label": "Cloudflare",
+    "description": "Cloudflare deployment, Workers, and edge services."
+  },
+  "i18n": {
+    "label": "i18n",
+    "description": "Internationalization, translation, and multilingual content."
+  },
+  "notes": {
+    "label": "Notes",
+    "description": "Research, reminders, and lightweight records."
+  },
+  "projects": {
+    "label": "Projects",
+    "description": "Project notes, retrospectives, and portfolio entries."
+  }
+}

@@ -1,0 +1,63 @@
+---
+import PostCard from "../../components/PostCard.astro";
+import { getBlogPosts, getProjects } from "../../lib/content";
+import { isLocale, locales, localizedPath, t } from "../../lib/i18n";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const lang = isLocale(Astro.params.lang) ? Astro.params.lang : "zh";
+const posts = (await getBlogPosts(lang)).slice(0, 3);
+const projects = (await getProjects(lang)).filter((entry) => entry.data.featured).slice(0, 3);
+---
+
+<BaseLayout locale={lang}>
+  <section class="hero">
+    <div>
+      <h1>{t(lang, "introTitle")}</h1>
+      <p>{t(lang, "intro")}</p>
+      <div class="hero-actions">
+        <a class="button" href={localizedPath(lang, "blog")}>{t(lang, "allPosts")}</a>
+        <a class="text-link" href={localizedPath(lang, "projects")}>{t(lang, "allProjects")}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" aria-labelledby="recent-posts">
+    <div class="section-heading">
+      <h2 id="recent-posts">{t(lang, "recentPosts")}</h2>
+      <a class="text-link" href={localizedPath(lang, "blog")}>{t(lang, "allPosts")}</a>
+    </div>
+    {
+      posts.length > 0 ? (
+        <div class="entry-grid">
+          {posts.map((entry) => (
+            <PostCard entry={entry} href={localizedPath(lang, `blog/${entry.data.slug}`)} locale={lang} cta={t(lang, "readMore")} />
+          ))}
+        </div>
+      ) : (
+        <p class="muted">{t(lang, "noPosts")}</p>
+      )
+    }
+  </section>
+
+  <section class="content-section" aria-labelledby="featured-projects">
+    <div class="section-heading">
+      <h2 id="featured-projects">{t(lang, "featuredProjects")}</h2>
+      <a class="text-link" href={localizedPath(lang, "projects")}>{t(lang, "allProjects")}</a>
+    </div>
+    {
+      projects.length > 0 ? (
+        <div class="entry-grid">
+          {projects.map((entry) => (
+            <PostCard entry={entry} href={localizedPath(lang, `projects/${entry.data.slug}`)} locale={lang} cta={t(lang, "viewProject")} />
+          ))}
+        </div>
+      ) : (
+        <p class="muted">{t(lang, "noProjects")}</p>
+      )
+    }
+  </section>
+</BaseLayout>

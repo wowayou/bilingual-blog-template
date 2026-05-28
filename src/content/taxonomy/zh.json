@@ -1,0 +1,26 @@
+{
+  "architecture": {
+    "label": "架构",
+    "description": "系统结构、技术选型和长期维护相关内容。"
+  },
+  "blogging": {
+    "label": "博客",
+    "description": "写作、发布流程和个人站点建设。"
+  },
+  "cloudflare": {
+    "label": "Cloudflare",
+    "description": "Cloudflare 部署、Workers 和边缘服务。"
+  },
+  "i18n": {
+    "label": "多语言",
+    "description": "国际化、翻译和多语言内容管理。"
+  },
+  "notes": {
+    "label": "笔记",
+    "description": "调研、备忘和轻量记录。"
+  },
+  "projects": {
+    "label": "项目",
+    "description": "项目记录、复盘和作品说明。"
+  }
+}

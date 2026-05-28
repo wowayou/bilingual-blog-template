@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Markdown sample image</title>
+  <desc id="desc">A simple abstract writing desk scene for testing image presentation.</desc>
+  <rect width="960" height="540" fill="#f8f7f3"/>
+  <path d="M0 420h960v120H0z" fill="#dfe8e1"/>
+  <rect x="170" y="110" width="620" height="300" rx="18" fill="#ffffff" stroke="#d9ded5" stroke-width="4"/>
+  <path d="M230 178h390M230 232h500M230 286h440M230 340h300" stroke="#174ea6" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="720" cy="180" r="42" fill="#0d766e"/>
+  <path d="M672 354c38-72 112-72 150 0" fill="none" stroke="#b85c38" stroke-width="18" stroke-linecap="round"/>
+</svg>

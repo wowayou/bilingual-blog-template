@@ -1,0 +1,17 @@
+{
+  "author": "Your Name",
+  "title": "Your Blog",
+  "description": "记录技术、工具、项目和长期思考的双语个人博客。",
+  "introTitle": "慢慢搭一个耐用的个人空间",
+  "intro": "这里会放技术笔记、项目复盘、工具实践和一些长期主题。中文是主场，英文版本会逐步补齐。",
+  "about": [
+    "这里是一个面向长期写作和项目沉淀的个人博客。首版会先把结构、发布、搜索、RSS、评论占位和双语内容流跑通。",
+    "内容会保持轻量：能直接帮助复盘、查找和分享的东西优先，其余部分随着真实写作慢慢长出来。"
+  ],
+  "timeZone": "UTC",
+  "license": {
+    "label": "CC BY-NC-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
+  },
+  "socialLinks": []
+}

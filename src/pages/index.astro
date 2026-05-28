@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localizedPath, locales, localeLabels } from "../lib/i18n";
+---
+
+<BaseLayout title="Language" description="Choose a language for the bilingual personal blog.">
+  <section class="hero">
+    <div>
+      <h1>Bilingual Personal Blog</h1>
+      <p>Choose your preferred language to enter the site.</p>
+      <div class="hero-actions">
+        {locales.map((locale) => <a class="button" href={localizedPath(locale)}>{localeLabels[locale]}</a>)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

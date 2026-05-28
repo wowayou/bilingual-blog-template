@@ -1,0 +1,30 @@
+---
+import { getBlogPosts, getTranslations, type BlogEntry } from "../../../lib/content";
+import { locales, localizedPath, type Locale } from "../../../lib/i18n";
+import ContentLayout from "../../../layouts/ContentLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((entry) => ({
+    params: { lang: entry.data.locale, slug: entry.data.slug },
+    props: { entry }
+  }));
+}
+
+const entry = Astro.props.entry as BlogEntry;
+const lang = entry.data.locale;
+const translations = await getTranslations("blog", entry.data.contentId);
+const alternates = Object.fromEntries(
+  locales.map((locale) => {
+    const translated = translations[locale] as BlogEntry | undefined;
+    return [
+      locale,
+      translated
+        ? { href: localizedPath(locale, `blog/${translated.data.slug}`), available: true }
+        : { href: "#", available: false }
+    ];
+  })
+) as Record<Locale, { href: string; available: boolean }>;
+---
+
+<ContentLayout entry={entry} locale={lang} collection="blog" alternates={alternates} />

@@ -1,0 +1,17 @@
+{
+  "author": "Your Name",
+  "title": "Your Blog",
+  "description": "A bilingual personal blog for engineering notes, projects, tools, and durable ideas.",
+  "introTitle": "Building a durable personal space",
+  "intro": "This site collects technical notes, project write-ups, tools, and long-running ideas. Chinese comes first; English versions will grow over time.",
+  "about": [
+    "This is a personal blog built for long-term writing and project notes. The first version focuses on structure, publishing, search, RSS, comment placeholders, and bilingual content flow.",
+    "The site stays intentionally lightweight: useful notes first, extra polish later as real writing accumulates."
+  ],
+  "timeZone": "UTC",
+  "license": {
+    "label": "CC BY-NC-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+  },
+  "socialLinks": []
+}

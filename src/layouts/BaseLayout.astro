@@ -1,0 +1,114 @@
+---
+import LanguageSwitch from "../components/LanguageSwitch.astro";
+import BackToTop from "../components/BackToTop.astro";
+import CurrentDateTime from "../components/CurrentDateTime.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { defaultLocale, localeNames, localizedPath, locales, t, type Locale } from "../lib/i18n";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  locale?: Locale;
+  alternates?: Partial<Record<Locale, { href: string; available: boolean }>>;
+  image?: string;
+  type?: "website" | "article";
+}
+
+const {
+  title,
+  description,
+  locale = defaultLocale,
+  alternates,
+  image,
+  type = "website"
+} = Astro.props;
+
+const siteTitle = t(locale, "siteTitle");
+const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+const pageDescription = description ?? t(locale, "siteDescription");
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://example.com").toString();
+const navItems = [
+  { href: localizedPath(locale), label: t(locale, "home") },
+  { href: localizedPath(locale, "blog"), label: t(locale, "blog") },
+  { href: localizedPath(locale, "projects"), label: t(locale, "projects") },
+  { href: localizedPath(locale, "tags"), label: t(locale, "tags") },
+  { href: localizedPath(locale, "archive"), label: t(locale, "archive") },
+  { href: localizedPath(locale, "search"), label: t(locale, "search") },
+  { href: localizedPath(locale, "about"), label: t(locale, "about") }
+];
+const switchAlternates =
+  alternates ??
+  Object.fromEntries(locales.map((item) => [item, { href: localizedPath(item), available: true }]));
+---
+
+<!doctype html>
+<html lang={localeNames[locale]}>
+  <head>
+    <script is:inline>
+      (() => {
+        const key = "blog-theme";
+        const preference = localStorage.getItem(key) || "system";
+        const theme =
+          preference === "light" || preference === "dark"
+            ? preference
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.dataset.themePreference = preference;
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8f7f3" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111311" />
+    <meta name="apple-mobile-web-app-title" content={siteTitle} />
+    <meta name="application-name" content={siteTitle} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site ?? "https://example.com").toString()} />
+    {
+      Object.entries(switchAlternates).map(([alternateLocale, alternate]) =>
+        alternate.available ? (
+          <link
+            rel="alternate"
+            hreflang={localeNames[alternateLocale as Locale]}
+            href={new URL(alternate.href, Astro.site ?? "https://example.com").toString()}
+          />
+        ) : null
+      )
+    }
+    <link rel="alternate" type="application/rss+xml" title={`${siteTitle} RSS`} href={localizedPath(locale, "rss.xml")} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={image} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={localizedPath(locale)}>{siteTitle}</a>
+      <nav class="main-nav" aria-label="Primary">
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <div class="header-tools">
+        <LanguageSwitch currentLocale={locale} alternates={switchAlternates} />
+        <ThemeToggle locale={locale} />
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>{siteTitle}</span>
+      <CurrentDateTime locale={locale} />
+      <a href={localizedPath(locale, "rss.xml")}>{t(locale, "rss")}</a>
+    </footer>
+    <BackToTop locale={locale} />
+  </body>
+</html>

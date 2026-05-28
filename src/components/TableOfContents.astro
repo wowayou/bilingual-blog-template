@@ -1,0 +1,122 @@
+---
+import type { MarkdownHeading } from "astro";
+import { t, type Locale } from "../lib/i18n";
+
+interface Props {
+  headings: MarkdownHeading[];
+  locale: Locale;
+}
+
+const { headings, locale } = Astro.props;
+const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+const dialogId = `toc-dialog-${locale}`;
+---
+
+{
+  tocHeadings.length > 0 && (
+    <aside class="toc-panel" aria-labelledby="toc-title">
+      <div class="toc-desktop">
+        <p class="toc-kicker" id="toc-title">{t(locale, "toc")}</p>
+        <nav class="toc-nav" aria-label={t(locale, "toc")}>
+          <ol>
+            {tocHeadings.map((heading) => (
+              <li class={`depth-${heading.depth}`}>
+                <a class="toc-link" href={`#${heading.slug}`} data-toc-link={heading.slug}>
+                  <span>{heading.text}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </div>
+      <div class="toc-mobile">
+        <button class="toc-mobile-trigger" type="button" data-toc-open aria-haspopup="dialog" aria-controls={dialogId}>
+          <span class="toc-mobile-label">{t(locale, "toc")}</span>
+          <span class="toc-mobile-current" data-toc-current>{tocHeadings[0].text}</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 10l4 4 4-4"></path>
+          </svg>
+        </button>
+        <dialog class="toc-dialog" id={dialogId} data-toc-dialog>
+          <div class="toc-dialog-panel">
+            <header class="toc-dialog-header">
+              <h2>{t(locale, "toc")}</h2>
+              <button class="toc-dialog-close" type="button" data-toc-close aria-label="Close">×</button>
+            </header>
+            <nav class="toc-nav" aria-label={t(locale, "toc")}>
+              <ol>
+                {tocHeadings.map((heading) => (
+                  <li class={`depth-${heading.depth}`}>
+                    <a class="toc-link" href={`#${heading.slug}`} data-toc-link={heading.slug}>
+                      <span>{heading.text}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </div>
+        </dialog>
+      </div>
+    </aside>
+  )
+}
+
+<script is:inline>
+  const tocLinks = [...document.querySelectorAll("[data-toc-link]")];
+  const tocCurrent = document.querySelector("[data-toc-current]");
+  const headingIds = [...new Set(tocLinks.map((link) => link.getAttribute("data-toc-link")).filter(Boolean))];
+  const headings = headingIds
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+  const tocDialog = document.querySelector("[data-toc-dialog]");
+  const tocOpen = document.querySelector("[data-toc-open]");
+  const tocClose = document.querySelector("[data-toc-close]");
+
+  if (tocLinks.length && headings.length) {
+    const activate = (id) => {
+      const activeLink = tocLinks.find((link) => link.getAttribute("data-toc-link") === id);
+
+      tocLinks.forEach((link) => {
+        const active = link.getAttribute("data-toc-link") === id;
+        link.classList.toggle("active", active);
+        if (active) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      if (tocCurrent && activeLink) {
+        tocCurrent.textContent = activeLink.textContent.trim();
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (visible) {
+          activate(visible.target.id);
+        }
+      },
+      { rootMargin: "-18% 0px -70% 0px", threshold: [0, 1] }
+    );
+
+    headings.forEach((heading) => observer.observe(heading));
+    activate(headings[0].id);
+  }
+
+  if (tocDialog instanceof HTMLDialogElement && tocOpen) {
+    tocOpen.addEventListener("click", () => tocDialog.showModal());
+    tocClose?.addEventListener("click", () => tocDialog.close());
+    tocDialog.addEventListener("click", (event) => {
+      if (event.target === tocDialog) tocDialog.close();
+    });
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (tocDialog.open) tocDialog.close();
+      });
+    });
+  }
+</script>

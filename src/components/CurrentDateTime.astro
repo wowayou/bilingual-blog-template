@@ -1,0 +1,51 @@
+---
+import { getSiteProfile } from "../site.config";
+import { localeNames, t, type Locale } from "../lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const profile = getSiteProfile(locale);
+const now = new Date();
+---
+
+<time
+  class="current-datetime"
+  data-current-datetime
+  data-locale={localeNames[locale]}
+  data-time-zone={profile.timeZone}
+  datetime={now.toISOString()}
+  aria-label={t(locale, "currentDateTime")}
+>
+  {now.toISOString().slice(0, 16).replace("T", " ")} {profile.timeZone}
+</time>
+
+<script is:inline>
+  (() => {
+    const nodes = [...document.querySelectorAll("[data-current-datetime]")];
+
+    const update = () => {
+      for (const node of nodes) {
+        const locale = node.getAttribute("data-locale") || undefined;
+        const timeZone = node.getAttribute("data-time-zone") || undefined;
+        const now = new Date();
+        const formatter = new Intl.DateTimeFormat(locale, {
+          timeZone,
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+        if (node instanceof HTMLTimeElement) node.dateTime = now.toISOString();
+        node.textContent = `${formatter.format(now)} ${timeZone || ""}`.trim();
+      }
+    };
+
+    update();
+    window.setInterval(update, 60_000);
+  })();
+</script>

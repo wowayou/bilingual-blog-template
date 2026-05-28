@@ -1,0 +1,47 @@
+---
+import { t, type Locale } from "../lib/i18n";
+
+interface Props {
+  locale: Locale;
+  pageSize?: number;
+  listClass?: string;
+}
+
+const { locale, pageSize = 12, listClass = "list-stack" } = Astro.props;
+---
+
+<div class="load-more" data-load-more data-page-size={pageSize}>
+  <div class={listClass} data-load-more-list>
+    <slot />
+  </div>
+  <button class="button load-more-button" type="button" data-load-more-button hidden>{t(locale, "loadMore")}</button>
+</div>
+
+<script is:inline>
+  (() => {
+    const roots = [...document.querySelectorAll("[data-load-more]")];
+
+    for (const root of roots) {
+      const list = root.querySelector("[data-load-more-list]");
+      const button = root.querySelector("[data-load-more-button]");
+      const size = Number(root.getAttribute("data-page-size")) || 12;
+      const items = list ? [...list.children].filter((item) => item instanceof HTMLElement) : [];
+      let visible = size;
+
+      if (!list || !button || items.length <= size) continue;
+
+      const render = () => {
+        items.forEach((item, index) => {
+          item.hidden = index >= visible;
+        });
+        button.hidden = visible >= items.length;
+      };
+
+      button.addEventListener("click", () => {
+        visible += size;
+        render();
+      });
+      render();
+    }
+  })();
+</script>

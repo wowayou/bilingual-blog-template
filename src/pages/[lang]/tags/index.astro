@@ -1,0 +1,21 @@
+---
+import { getAllTags } from "../../../lib/content";
+import { isLocale, locales, localizedPath, t, tagLabel } from "../../../lib/i18n";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const lang = isLocale(Astro.params.lang) ? Astro.params.lang : "zh";
+const tags = await getAllTags(lang);
+---
+
+<BaseLayout title={t(lang, "tags")} locale={lang}>
+  <header class="page-header">
+    <h1>{t(lang, "tags")}</h1>
+  </header>
+  <div class="tag-row">
+    {tags.map((tag) => <a href={localizedPath(lang, `tags/${tag}`)}>{tagLabel(tag, lang)}</a>)}
+  </div>
+</BaseLayout>
