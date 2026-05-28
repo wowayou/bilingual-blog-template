@@ -1,7 +1,7 @@
 ---
 import LoadMoreList from "../../components/LoadMoreList.astro";
+import PostCard from "../../components/PostCard.astro";
 import { getBlogPosts } from "../../lib/content";
-import { formatDate } from "../../lib/content";
 import { isLocale, locales, localizedPath, t } from "../../lib/i18n";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
@@ -18,30 +18,11 @@ const posts = await getBlogPosts(lang);
     <h1>{t(lang, "archive")}</h1>
     <p>{t(lang, "allPosts")}</p>
   </header>
-  <LoadMoreList locale={lang}>
+  <LoadMoreList locale={lang} listClass="entry-grid">
     {
-      posts.map((entry) => {
-        const cover = entry.data.cover;
-        const href = localizedPath(lang, `blog/${entry.data.slug}`);
-
-        return (
-          <article class:list={["entry-card", "archive-card", { "has-cover": cover }]}>
-            {
-              cover && (
-                <a class="entry-card-cover" href={href} aria-label={entry.data.title}>
-                  <img src={cover.src} alt={cover.alt} loading="lazy" style={cover.objectPosition ? `object-position: ${cover.objectPosition}` : undefined} />
-                </a>
-              )
-            }
-            <div class="entry-card-body">
-              <div class="entry-meta">
-                <time datetime={entry.data.pubDate.toISOString()}>{formatDate(entry.data.pubDate, lang)}</time>
-              </div>
-              <h2><a href={href}>{entry.data.title}</a></h2>
-            </div>
-          </article>
-        );
-      })
+      posts.map((entry) => (
+        <PostCard entry={entry} href={localizedPath(lang, `blog/${entry.data.slug}`)} locale={lang} cta={t(lang, "readMore")} />
+      ))
     }
   </LoadMoreList>
 </BaseLayout>
