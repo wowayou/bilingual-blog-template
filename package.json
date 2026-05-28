@@ -8,7 +8,8 @@
     "check": "astro check",
     "build": "astro check && astro build && pagefind --site dist --output-path dist/pagefind",
     "preview": "astro preview",
-    "translate": "node scripts/translate.mjs"
+    "translate": "node scripts/translate.mjs",
+    "customize": "node scripts/customize-site.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",

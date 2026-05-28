@@ -27,13 +27,37 @@ The private repository should become the real blog. The public template should c
 
 ## 3. First Private-Site Edits
 
-Update these files first:
+Use the customization script first. It updates the localized site profiles and web manifest from one local config file:
+
+```bash
+cp site.customize.example.json site.customize.json
+npm run customize
+```
+
+On Windows PowerShell, use:
+
+```powershell
+Copy-Item site.customize.example.json site.customize.json
+npm run customize
+```
+
+Edit `site.customize.json` before running the command. This file is ignored by Git, so the private site can keep real identity and social links outside the public template history.
+
+The script can update:
+
+- Chinese and English site title, description, author, intro, About copy, timezone, license, and `socialLinks`.
+- `public/site.webmanifest` name and short name.
+
+After running it, review these files:
 
 - `src/content/site/zh.json`
 - `src/content/site/en.json`
+- `public/site.webmanifest`
+
+Then update these files manually when needed:
+
 - `src/content/taxonomy/*.json` if tags change
 - `public/favicon.svg`
-- `public/site.webmanifest`
 - `public/images/posts/<contentId>/`
 - `wrangler.toml`
 - GitHub repository variables and secrets
@@ -47,6 +71,7 @@ Suggested private-site identity fields:
 - `intro`: homepage intro paragraph
 - `about`: the About page paragraphs
 - `timeZone`: your preferred display timezone
+- `socialLinks`: footer links, for example GitHub, X, Bluesky, Mastodon, email, or RSS
 
 ## 4. About Draft
 

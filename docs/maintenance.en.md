@@ -20,12 +20,19 @@ This guide is for humans maintaining the Astro bilingual blog template. The goal
 ```bash
 npm install
 npm run dev
+npm run customize
 npm run check
 npm run build
 npm run preview
 ```
 
 Run at least `npm run check` and `npm run build` before committing.
+
+## One-Command Site Customization
+
+For a private site, copy `site.customize.example.json` to a local `site.customize.json`, edit it, then run `npm run customize`. This applies the site title, author, description, About copy, timezone, license, footer social links, and manifest name from one file.
+
+`site.customize.json` is ignored by Git. Do not commit real personal identity, private social profiles, or unpublished site details to the public template repository. Keep only `site.customize.example.json` and the script in the template.
 
 ## Content Maintenance
 

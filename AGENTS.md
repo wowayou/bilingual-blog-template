@@ -22,6 +22,14 @@ npm run dev
 npm run preview
 ```
 
+For private-site identity setup:
+
+```bash
+npm run customize
+```
+
+This reads the ignored local `site.customize.json` file and updates localized site profiles plus optional web manifest fields.
+
 Do not run deployment commands unless explicitly asked.
 
 ## Important Paths
@@ -31,6 +39,8 @@ Do not run deployment commands unless explicitly asked.
 - `src/content/site/*.json`: localized site profile data.
 - `src/content/taxonomy/*.json`: localized tag metadata.
 - `src/i18n/messages/*.ts`: localized UI strings.
+- `site.customize.example.json`: example config for one-command private-site replacement.
+- `scripts/customize-site.mjs`: applies local `site.customize.json` values to site profiles and manifest.
 - `public/images/posts/<contentId>/`: post media using stable public paths.
 - `src/layouts/BaseLayout.astro`: base document shell.
 - `src/layouts/ContentLayout.astro`: article/project shell and content enhancements.
@@ -44,6 +54,8 @@ Do not run deployment commands unless explicitly asked.
 - Keep content schema changes backward compatible when possible.
 - When adding a UI label, add it to both `src/i18n/messages/zh.ts` and `src/i18n/messages/en.ts`.
 - When adding a tag, add it to every taxonomy file before using it in content.
+- Keep `site.customize.json` uncommitted. It is for private-site local identity values.
+- Keep footer social links in `src/content/site/*.json` under `socialLinks`; use the customization script for repeated private-site setup.
 - When adding post images, keep them under `public/images/posts/<contentId>/` and prefer explicit `cover` frontmatter over implicit first-image behavior.
 - Keep all routes trailing-slash compatible.
 - Respect `prefers-reduced-motion` for visual transitions.

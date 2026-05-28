@@ -1,0 +1,40 @@
+{
+  "zh": {
+    "author": "Your Name",
+    "title": "Your Blog",
+    "description": "记录技术、工具、项目和长期思考的双语个人博客。",
+    "introTitle": "写作、构建和长期复盘",
+    "intro": "这里记录我在技术、AI 工具、产品构思和个人项目中的实践。",
+    "about": [
+      "这里是我的个人博客，用来记录技术实践、AI Coding、文档驱动开发、工具工作流、项目复盘，以及一些关于效率、设计和长期学习的思考。"
+    ],
+    "timeZone": "Asia/Shanghai",
+    "socialLinks": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/wowayou"
+      }
+    ]
+  },
+  "en": {
+    "author": "Your Name",
+    "title": "Your Blog",
+    "description": "A bilingual personal blog for engineering notes, projects, tools, and durable ideas.",
+    "introTitle": "Writing, building, and long-term reflection",
+    "intro": "This site collects my notes on engineering, AI tools, product ideas, and personal projects.",
+    "about": [
+      "This is my personal blog for technical practice, AI coding, document-driven development, tool workflows, project retrospectives, and longer thoughts about productivity, design, and learning."
+    ],
+    "timeZone": "Asia/Shanghai",
+    "socialLinks": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/wowayou"
+      }
+    ]
+  },
+  "manifest": {
+    "name": "Your Blog",
+    "short_name": "Your Blog"
+  }
+}

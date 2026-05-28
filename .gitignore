@@ -5,6 +5,7 @@ dist/
 .env
 .env.*
 !.env.example
+site.customize.json
 npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*

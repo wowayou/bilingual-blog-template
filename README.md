@@ -34,6 +34,15 @@ Localized profile edits live in:
 
 UI labels live in `src/i18n/messages/*`. Localized tag labels live in `src/content/taxonomy/*`.
 
+For a private site, use the one-command customization flow instead of editing the two profile files by hand:
+
+```bash
+cp site.customize.example.json site.customize.json
+npm run customize
+```
+
+Edit `site.customize.json` with your real title, About copy, timezone, manifest name, and footer social links. The local `site.customize.json` file is ignored by Git, while the example file documents the replacement strategy.
+
 ## UI Features
 
 - Light / System / Dark theme switching
@@ -41,6 +50,7 @@ UI labels live in `src/i18n/messages/*`. Localized tag labels live in `src/conte
 - Click-to-zoom article images
 - Copy buttons on Markdown code blocks
 - Load more behavior for long listing pages
+- Footer social links from `src/content/site/*.json`
 - SVG favicon and web manifest in `public/`
 
 ## Translation Drafts

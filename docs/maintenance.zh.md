@@ -20,12 +20,19 @@
 ```bash
 npm install
 npm run dev
+npm run customize
 npm run check
 npm run build
 npm run preview
 ```
 
 提交前至少运行 `npm run check` 和 `npm run build`。
+
+## 一键替换站点资料
+
+私人站建议从 `site.customize.example.json` 复制出本地的 `site.customize.json`，然后运行 `npm run customize`。这个流程会把站点标题、作者、简介、About、时区、许可、页脚社媒链接和 manifest 名称集中替换到对应文件中。
+
+`site.customize.json` 已加入 `.gitignore`，不要提交真实个人资料、私有社媒或未公开站点信息。模板仓库只维护 `site.customize.example.json` 和脚本本身。
 
 ## 内容维护
 
